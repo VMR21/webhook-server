@@ -25,7 +25,7 @@ app.post("/api/payment-hook", async (req, res) => {
   const email = payment.email;
 
   // Replace with your product download link
-  const productLink = "https://shopisnap.com/download/500-shopify-themes.zip";
+  const productLink = "https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6";
 
   await sendEmail(email, productLink);
   res.send("Email sent!");
@@ -35,8 +35,8 @@ async function sendEmail(to, link) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "your@gmail.com",
-      pass: "your_app_password", // Use Gmail app password
+      user: "shoya3247@gmail.com",
+      pass: "Discord##3247", // Use Gmail app password
     },
   });
 
