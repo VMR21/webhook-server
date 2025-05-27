@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 app.use(bodyParser.json());
 
-const RAZORPAY_SECRET = "your_webhook_secret_here";
+const RAZORPAY_SECRET = "shopisnap123";
 
 app.post("/api/payment-hook", async (req, res) => {
   const signature = req.headers["x-razorpay-signature"];
