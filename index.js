@@ -23,28 +23,82 @@ app.post("/api/payment-hook", async (req, res) => {
 
   const payment = req.body.payload.payment.entity;
   const email = payment.email;
+  const amount = payment.amount / 100; // Convert from paise to rupees
 
-  // Replace with your product download link
-  const productLink = "https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6";
+  let message = "";
 
-  await sendEmail(email, productLink);
-  res.send("Email sent!");
+  if (amount === 1) {
+    message = `
+🧪 TEST MODE EMAIL
+
+Your payment of ₹1 was successful (for testing purposes).
+
+If you were testing your setup — it worked! ✅
+
+Email: ${email}
+Amount Paid: ₹${amount}
+
+Team ShopiSnap 💚
+    `;
+  } else if (amount === 249) {
+    message = `
+🎉 Congratulations for making this wonderful purchase with us!
+
+Download 500+ Shopify Themes:
+👉 THEME BUNDLE: https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6
+📋 CHECKLIST: https://docs.google.com/spreadsheets/d/1dYJMxnHkp7oKZnabL4L2kvaysHi059X_
+
+If you have any problems accessing it, please contact our support at:
+📧 Email - shoya3247@gmail.com
+
+Love & Regards,  
+Team ShopiSnap 💚
+    `;
+  } else if (amount === 398) {
+    message = `
+🎉 Congratulations for making this wonderful purchase with us!
+
+Download 500+ Shopify Themes:
+👉 THEME BUNDLE: https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6
+🔍 SEO CHECKLIST: https://docs.google.com/spreadsheets/d/1dYJMxnHkp7oKZnabL4L2kvaysHi059X_
+
+If you have any problems accessing it, please contact our support at:
+📧 Email - shoya3247@gmail.com
+
+Love & Regards,  
+Team ShopiSnap 💚
+    `;
+  } else {
+    message = `
+We received your payment of ₹${amount}, but couldn't match it to a known product tier.
+
+Please contact support at 📧 shoya3247@gmail.com for assistance.
+    `;
+  }
+
+  try {
+    await sendEmail(email, message);
+    res.send("Email sent!");
+  } catch (err) {
+    console.error("Email sending failed:", err);
+    res.status(500).send("Email sending failed.");
+  }
 });
 
-async function sendEmail(to, link) {
+async function sendEmail(to, bodyText) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: "shoya3247@gmail.com",
-      pass: "svtmokqdgsunfeic", // Use Gmail app password
+      pass: "svtmokqdgsunfeic", // Gmail App Password
     },
   });
 
   await transporter.sendMail({
-    from: "ShopiSnap <your@gmail.com>",
+    from: "ShopiSnap <shoya3247@gmail.com>",
     to,
     subject: "Your Shopify Templates 🎁",
-    text: `Thanks for your payment! Here's your download link: ${link}`,
+    text: bodyText,
   });
 }
 
