@@ -36,7 +36,7 @@ async function sendEmail(to, link) {
     service: "gmail",
     auth: {
       user: "shoya3247@gmail.com",
-      pass: "Discord##3247", // Use Gmail app password
+      pass: "svtmokqdgsunfeic", // Use Gmail app password
     },
   });
 
