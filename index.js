@@ -23,7 +23,7 @@ app.post("/api/payment-hook", async (req, res) => {
 
   const payment = req.body.payload.payment.entity;
   const email = payment.email;
-  const amount = payment.amount / 100; // Convert from paise to rupees
+  const amount = payment.amount / 100;
 
   let message = "";
 
@@ -31,48 +31,63 @@ app.post("/api/payment-hook", async (req, res) => {
     message = `
 🧪 TEST MODE EMAIL
 
-Your payment of ₹1 was successful (for testing purposes).
+Your ₹1 test payment was successful.
 
-If you were testing your setup — it worked! ✅
+This confirms that your webhook and email delivery are working perfectly. ✅
 
-Email: ${email}
-Amount Paid: ₹${amount}
+Email used: ${email}  
+Amount Paid: ₹1
 
-Team ShopiSnap 💚
+You’re all set to start selling!
+
+With appreciation,  
+💚 Team ShopiSnap
     `;
   } else if (amount === 249) {
     message = `
-🎉 Congratulations for making this wonderful purchase with us!
+🎉 Thank you for your purchase, and welcome to the ShopiSnap family!
 
-Download 500+ Shopify Themes:
-👉 THEME BUNDLE: https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6
-📋 CHECKLIST: https://docs.google.com/spreadsheets/d/1dYJMxnHkp7oKZnabL4L2kvaysHi059X_
+Your ₹249 plan was successfully activated. As promised, here is your exclusive bundle:
 
-If you have any problems accessing it, please contact our support at:
-📧 Email - shoya3247@gmail.com
+📦 500+ Shopify Themes  
+👉 Download Link: https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6
 
-Love & Regards,  
-Team ShopiSnap 💚
+We hope these themes help you launch and grow your dream store effortlessly.
+
+If you face any issues accessing the download, just reply to this email or contact us at:
+📧 shoya3247@gmail.com
+
+With appreciation,  
+💚 Team ShopiSnap
     `;
   } else if (amount === 398) {
     message = `
-🎉 Congratulations for making this wonderful purchase with us!
+🎉 You’ve unlocked the Premium Pack — thank you for your ₹398 purchase!
 
-Download 500+ Shopify Themes:
-👉 THEME BUNDLE: https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6
-🔍 SEO CHECKLIST: https://docs.google.com/spreadsheets/d/1dYJMxnHkp7oKZnabL4L2kvaysHi059X_
+Here’s everything you need to build and grow your store like a pro:
 
-If you have any problems accessing it, please contact our support at:
-📧 Email - shoya3247@gmail.com
+📦 500+ Shopify Themes  
+👉 Download Link: https://drive.google.com/drive/folders/15slJTHPRfD6bj0Cc3chCe_6d9TOfrAw6
 
-Love & Regards,  
-Team ShopiSnap 💚
+🔍 Premium SEO Checklist  
+👉 Access Link: https://docs.google.com/spreadsheets/d/1dYJMxnHkp7oKZnabL4L2kvaysHi059X_
+
+If you need any help, we’re always here:
+📧 Email: shoya3247@gmail.com
+
+Wishing you success ahead!  
+💚 Team ShopiSnap
     `;
   } else {
     message = `
-We received your payment of ₹${amount}, but couldn't match it to a known product tier.
+We received your payment of ₹${amount}, but it doesn’t match any known product tier.
 
-Please contact support at 📧 shoya3247@gmail.com for assistance.
+Please contact us for support:
+📧 shoya3247@gmail.com
+
+We're happy to assist you!
+
+- Team ShopiSnap 💚
     `;
   }
 
